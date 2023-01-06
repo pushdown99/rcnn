@@ -1,10 +1,10 @@
 torch/
 pretrained/
 checkpoints/
-dataset/COCO/
-dataset/VOC/
-dataset/NIA/
-dataset/GENOME/
+dataset/COCO
+dataset/VOC
+dataset/NIA
+dataset/GENOME
 *.out
 *.pyc
 .ipynb_checkpoints/
