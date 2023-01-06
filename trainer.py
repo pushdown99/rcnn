@@ -59,7 +59,7 @@ class FasterRCNNTrainer(nn.Module):
 
         # indicators for training status
         self.rpn_cm = ConfusionMeter(2)
-        self.roi_cm = ConfusionMeter(21)
+        self.roi_cm = ConfusionMeter(opt.n_class + 1)
         self.meters = {k: AverageValueMeter() for k in LossTuple._fields}  # average loss
 
     def forward(self, imgs, bboxes, labels, scale):
@@ -196,7 +196,7 @@ class FasterRCNNTrainer(nn.Module):
 
         if save_path is None:
             timestr = time.strftime('%m%d%H%M')
-            save_path = 'checkpoints/fasterrcnn_%s' % timestr
+            save_path = 'checkpoints/{}_{}_{}'.format(opt.data, opt.env, timestr)
             for k_, v_ in kwargs.items():
                 save_path += '_%s' % v_
 
