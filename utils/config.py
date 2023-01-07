@@ -19,13 +19,13 @@ class Config:
     #data_dir = 'dataset/COCO/'
     #n_class = 80
 
-    data = 'nia'
-    data_dir = 'dataset/NIA/'
-    n_class = 168
+    #data = 'nia'
+    #data_dir = 'dataset/NIA/'
+    #n_class = 168
 
-    #data = 'vg'
-    #data_dir = 'dataset/GENOME/'
-    #n_class = 150
+    data = 'vg'
+    data_dir = 'dataset/GENOME/'
+    n_class = 150
 
 
     cuda = True

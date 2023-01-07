@@ -21,7 +21,7 @@ class VGBboxDataset:
         self.return_difficult = return_difficult
         self.label_names = VG_BBOX_LABEL_NAMES
 
-        self.instances = json.load(codecs.open(join(data_dir, 'instance.json'), 'r', 'utf-8-sig'))
+        self.instances = json.load(codecs.open(join(data_dir, 'instances.json'), 'r', 'utf-8-sig'))
 
 
     def __len__(self):
@@ -35,7 +35,7 @@ class VGBboxDataset:
         label     = list()
         difficult = list()
 
-        for obj in anno:
+        for obj in anno['bbox']:
             difficult.append(0)
             bbox.append(obj['bbox'])
             #print (i, id_, obj['name'], VG_BBOX_LABEL_NAMES.index(obj['name']), bbox)
