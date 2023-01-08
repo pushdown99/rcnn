@@ -53,6 +53,7 @@ class COCOBboxDataset:
         img_file = join(self.data_dir, 'train2017', '{:012d}.jpg'.format(int(id_)))
         if not os.path.isfile(img_file): img_file = join(self.data_dir, 'val2017',  '{:012d}.jpg'.format(int(id_)))
         if not os.path.isfile(img_file): img_file = join(self.data_dir, 'test2017', '{:012d}.jpg'.format(int(id_)))
+
         img = read_image(img_file, color=True)
 
         # if self.return_difficult:

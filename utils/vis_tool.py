@@ -14,46 +14,7 @@ from data.nia_dataset  import NIA_BBOX_LABEL_NAMES
 from data.vg_dataset  import VG_BBOX_LABEL_NAMES
 from utils.config import opt
 
-
-#VOC_BBOX_LABEL_NAMES = (
-#    'fly',
-#    'bike',
-#    'bird',
-#    'boat',
-#    'pin',
-#    'bus',
-#    'c',
-#    'cat',
-#    'chair',
-##    'cow',
-#    'table',
-#    'dog',
-#    'horse',
-#    'moto',
-#    'p',
-#    'plant',
-#    'shep',
-#    'sofa',
-#    'train',
-#    'tv',
-#)
-
-
 def vis_image(img, ax=None):
-    """Visualize a color image.
-
-    Args:
-        img (~numpy.ndarray): An array of shape :math:`(3, height, width)`.
-            This is in RGB format and the range of its value is
-            :math:`[0, 255]`.
-        ax (matplotlib.axes.Axis): The visualization is displayed on this
-            axis. If this is :obj:`None` (default), a new axis is created.
-
-    Returns:
-        ~matploblib.axes.Axes:
-        Returns the Axes object with the plot for further tweaking.
-
-    """
 
     if ax is None:
         fig = plot.figure()
@@ -65,32 +26,6 @@ def vis_image(img, ax=None):
 
 
 def vis_bbox(img, bbox, label=None, score=None, ax=None):
-    """Visualize bounding boxes inside image.
-
-    Args:
-        img (~numpy.ndarray): An array of shape :math:`(3, height, width)`.
-            This is in RGB format and the range of its value is
-            :math:`[0, 255]`.
-        bbox (~numpy.ndarray): An array of shape :math:`(R, 4)`, where
-            :math:`R` is the number of bounding boxes in the image.
-            Each element is organized
-            by :math:`(y_{min}, x_{min}, y_{max}, x_{max})` in the second axis.
-        label (~numpy.ndarray): An integer array of shape :math:`(R,)`.
-            The values correspond to id for label names stored in
-            :obj:`label_names`. This is optional.
-        score (~numpy.ndarray): A float array of shape :math:`(R,)`.
-             Each value indicates how confident the prediction is.
-             This is optional.
-        label_names (iterable of strings): Name of labels ordered according
-            to label ids. If this is :obj:`None`, labels will be skipped.
-        ax (matplotlib.axes.Axis): The visualization is displayed on this
-            axis. If this is :obj:`None` (default), a new axis is created.
-
-    Returns:
-        ~matploblib.axes.Axes:
-        Returns the Axes object with the plot for further tweaking.
-
-    """
 
     if opt.data == 'voc':
       label_names = list(VOC_BBOX_LABEL_NAMES) + ['bg']
@@ -144,13 +79,6 @@ def vis_bbox(img, bbox, label=None, score=None, ax=None):
 
 
 def fig2data(fig):
-    """
-    brief Convert a Matplotlib figure to a 4D numpy array with RGBA 
-    channels and return it
-
-    @param fig: a matplotlib figure
-    @return a numpy 3D array of RGBA values
-    """
     # draw the renderer
     fig.canvas.draw()
 
@@ -165,9 +93,6 @@ def fig2data(fig):
 
 
 def fig4vis(fig):
-    """
-    convert figure to ndarray
-    """
     ax = fig.get_figure()
     img_data = fig2data(ax).astype(np.int32)
     plot.close()
@@ -182,12 +107,6 @@ def visdom_bbox(*args, **kwargs):
 
 
 class Visualizer(object):
-    """
-    wrapper for visdom
-    you can still access naive visdom function by 
-    self.line, self.scater,self._send,etc.
-    due to the implementation of `__getattr__`
-    """
 
     def __init__(self, env='default', **kwargs):
         self.vis = visdom.Visdom('localhost',env=env, use_incoming_socket=False, **kwargs)
@@ -198,17 +117,10 @@ class Visualizer(object):
         self.log_text = ''
 
     def reinit(self, env='default', **kwargs):
-        """
-        change the config of visdom
-        """
         self.vis = visdom.Visdom(env=env, **kwargs)
         return self
 
     def plot_many(self, d):
-        """
-        plot multi values
-        @params d: dict (name,value) i.e. ('loss',0.11)
-        """
         for k, v in d.items():
             if v is not None:
                 self.plot(k, v)
@@ -218,9 +130,6 @@ class Visualizer(object):
             self.img(k, v)
 
     def plot(self, name, y, **kwargs):
-        """
-        self.plot('loss',1.00)
-        """
         x = self.index.get(name, 0)
         self.vis.line(Y=np.array([y]), X=np.array([x]),
                       win=name,

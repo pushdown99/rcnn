@@ -10,8 +10,19 @@ num_gpus    = t.cuda.device_count()
 num_workers = num_gpus * 4
 
 class Config:
+    data = 'nia'
+    data_dir = 'dataset/NIA/'
+    n_class = 168
+
+    min_size = 600  # image resize
+    max_size = 1000 # image resize
+    num_workers = num_workers
+    test_num_workers = num_workers
+
+    load_path = None
+
     lr = 0.01
-    max_epoch = 10
+    epoch = 10
     momentum = 0.9
     log_interval = 1000
     step_size = 2
