@@ -21,7 +21,7 @@ class COCOBboxDataset:
         self.return_difficult = return_difficult
         self.label_names = COCO_BBOX_LABEL_NAMES
 
-        self.instances = json.load(codecs.open(join(data_dir, 'instance.json'), 'r', 'utf-8-sig'))
+        self.instances = json.load(codecs.open(join(data_dir, 'instances.json'), 'r', 'utf-8-sig'))
 
 
     def __len__(self):
@@ -35,7 +35,7 @@ class COCOBboxDataset:
         label     = list()
         difficult = list()
 
-        for obj in anno:
+        for obj in anno['bbox']:
             difficult.append(0)
             bbox.append(obj['bbox'])
             #print (i, id_, obj['name'], COCO_BBOX_LABEL_NAMES.index(obj['name']), bbox)
@@ -51,6 +51,8 @@ class COCOBboxDataset:
 
         # Load a image
         img_file = join(self.data_dir, 'train2017', '{:012d}.jpg'.format(int(id_)))
+        if not os.path.isfile(img_file): img_file = join(self.data_dir, 'val2017',  '{:012d}.jpg'.format(int(id_)))
+        if not os.path.isfile(img_file): img_file = join(self.data_dir, 'test2017', '{:012d}.jpg'.format(int(id_)))
         img = read_image(img_file, color=True)
 
         # if self.return_difficult:

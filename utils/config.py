@@ -15,17 +15,17 @@ class Config:
     #data_dir = 'dataset/VOC/VOC2007/'
     #n_class = 20
 
-    #data = 'coco'
-    #data_dir = 'dataset/COCO/'
-    #n_class = 80
+    data = 'coco'
+    data_dir = 'dataset/COCO/'
+    n_class = 80
 
     #data = 'nia'
     #data_dir = 'dataset/NIA/'
     #n_class = 168
 
-    data = 'vg'
-    data_dir = 'dataset/GENOME/'
-    n_class = 150
+    #data = 'vg'
+    #data_dir = 'dataset/GENOME/'
+    #n_class = 150
 
 
     cuda = True
@@ -56,7 +56,7 @@ class Config:
 
     # training
     epoch = 14               #14
-    test_num = 10000
+    test_num = 100
 
 
     use_adam    = False # Use Adam optimizer
