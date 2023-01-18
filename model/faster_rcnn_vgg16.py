@@ -11,7 +11,7 @@ from utils.config import opt
 
 
 def decom_vgg16():
-    # the 30th layer of features is relu of conv5_3
+    # the 30th layer of features is relu of conv5_3: hyhwang
     if opt.caffe_pretrain:
         model = vgg16(pretrained=False)
         if not opt.load_path:
@@ -22,7 +22,7 @@ def decom_vgg16():
     features = list(model.features)[:30]
     classifier = model.classifier
 
-    classifier = list(classifier)
+    classifier = list(classifier) # 7 layers: hyhwang
     del classifier[6]
     if not opt.use_drop:
         del classifier[5]
@@ -46,7 +46,7 @@ class FasterRCNNVGG16(FasterRCNN):
         extractor, classifier = decom_vgg16()
 
         rpn = RegionProposalNetwork(512, 512, ratios=ratios, anchor_scales=anchor_scales, feat_stride=self.feat_stride,)
-        head = VGG16RoIHead( n_class=n_fg_class + 1, roi_size=7, spatial_scale=(1. / self.feat_stride), classifier=classifier)
+        head = VGG16RoIHead( n_class=n_fg_class + 1, roi_size=7, spatial_scale=(1. / self.feat_stride), classifier=classifier) # roi_size 7 (default): hyhwang
 
         super(FasterRCNNVGG16, self).__init__( extractor, rpn, head,)
 

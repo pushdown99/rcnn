@@ -11,13 +11,13 @@ num_workers = num_gpus * 4
 
 class Config:
     # data
-    #data = 'voc'
-    #data_dir = 'dataset/VOC/VOC2007/'
-    #n_class = 20
+    data = 'voc'
+    data_dir = 'dataset/VOC/VOC2007/'
+    n_class = 20
 
-    data = 'coco'
-    data_dir = 'dataset/COCO/'
-    n_class = 80
+    #data = 'coco'
+    #data_dir = 'dataset/COCO/'
+    #n_class = 80
 
     #data = 'nia'
     #data_dir = 'dataset/NIA/'
