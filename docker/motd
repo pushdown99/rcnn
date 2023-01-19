@@ -1,0 +1,24 @@
+----------------------------------------------------------------------------
+
+FactorizableNet (MSDN) for Scene Graph Generation
+
+- paper : ECCV-2018 paper
+          Factorizable Net
+          An Efficient Subgraph-based Framework for Scene Graph Generation
+
+- docker: from nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
+
+* cuda    == 11.1
+* cudnn   == 8.1.0
+* python  == 3.8.10
+* pytorch == 1.8.0
+* numpy   == 1.23.1
+
+----------------------------------------------------------------------------
+
+WARNING: You are running this container as root, which can cause new files in
+mounted volumes to be created as the root user on your host machine.
+
+To avoid this, run the container by specifying your user's userid:
+$ docker run -u $(id -u):$(id -g) args...
+
